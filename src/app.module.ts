@@ -3,21 +3,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Connection } from 'typeorm';
-import { AccountsModule } from './accounts/accounts.module';
-import { CategoriesModule } from './categories/categories.module';
-import { MovementsModule } from './movements/movements.module';
 import { SharedModule } from './shared/shared.module';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
-    AccountsModule,
-    CategoriesModule,
-    MovementsModule,
+    GraphQLModule.forRoot({
+      installSubscriptionHandlers: true,
+      autoSchemaFile: 'schema.gql',
+    }),
     SharedModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {

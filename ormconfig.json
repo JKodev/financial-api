@@ -6,8 +6,7 @@
   "password": "example",
   "database": "financial_db",
   "entities": [
-    "dist/**/*.entity{.ts,.js}",
-    "src/**/*.entity{.ts,.js}"
+    "dist/**/*.entity{.ts,.js}"
   ],
   "synchronize": true
 }
