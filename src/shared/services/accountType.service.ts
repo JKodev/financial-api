@@ -1,8 +1,8 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { AccountTypeEntity } from '../entities/accountType.entity';
+import { AccountTypeEntity } from '../entities';
 import { Repository } from 'typeorm';
-import { AccountTypeInputDto } from '../dto/accountType.input.dto';
-import { AccountType } from '../models/accountType';
+import { AccountTypeInputDto } from '../dto';
+import { AccountType } from '../models';
 
 export class AccountTypeService {
   constructor(
@@ -19,5 +19,9 @@ export class AccountTypeService {
 
   findAll(): Promise<AccountType[]> {
     return this.accountTypeRepository.find();
+  }
+
+  findOne(accountTypeId: number): Promise<AccountType> {
+    return this.accountTypeRepository.findOne(accountTypeId);
   }
 }

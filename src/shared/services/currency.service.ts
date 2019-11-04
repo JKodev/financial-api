@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CurrencyInputDto } from '../dto/currency.input.dto';
-import { Currency } from '../models/currency';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CurrencyInputDto } from '../dto';
+import { Currency } from '../models';
 import { CurrencyEntity } from '../entities/currency.entity';
 import { Repository } from 'typeorm';
 
@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 export class CurrencyService {
   constructor(
     @InjectRepository(CurrencyEntity)
-    private readonly moneyRepository: Repository<CurrencyEntity>,
+    private readonly currencyRepository: Repository<CurrencyEntity>,
   ) {}
 
   create(data: CurrencyInputDto): Promise<Currency> {
@@ -17,10 +17,14 @@ export class CurrencyService {
     money.name = data.name;
     money.code = data.code;
     money.symbol = data.symbol;
-    return this.moneyRepository.save(money);
+    return this.currencyRepository.save(money);
   }
 
   findAll(): Promise<Currency[]> {
-    return this.moneyRepository.find();
+    return this.currencyRepository.find();
+  }
+
+  findOne(currencyId: number): Promise<Currency> {
+    return this.currencyRepository.findOne(currencyId);
   }
 }

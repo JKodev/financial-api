@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { Connection } from 'typeorm';
 import { SharedModule } from './shared/shared.module';
 import { GraphQLModule } from '@nestjs/graphql';
+import { AccountModule } from './account/account.module';
 
 @Module({
   imports: [
@@ -14,6 +13,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       autoSchemaFile: 'schema.gql',
     }),
     SharedModule,
+    AccountModule,
   ],
 })
 export class AppModule {
